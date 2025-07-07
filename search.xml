@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>First Post</title>
-    <url>/2024/05/First-Post/</url>
-    <content><![CDATA[<!-- 阅读全文分隔符 -->
-<span id="more"></span>]]></content>
+    <title>使用docker-compose部署单机MySQL</title>
+    <url>/2024/%E4%BD%BF%E7%94%A8docker-compose%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BAMySQL/</url>
+    <content><![CDATA[<h3 id="一、拉取MySQL镜像"><a href="#一、拉取MySQL镜像" class="headerlink" title="一、拉取MySQL镜像"></a>一、拉取MySQL镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mysql:8</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、创建挂载目录"><a href="#二、创建挂载目录" class="headerlink" title="二、创建挂载目录"></a>二、创建挂载目录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /app/docker/mysql8/log</span><br><span class="line"><span class="built_in">mkdir</span> -p /app/docker/mysql8/data</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、编写-docker-compose-yml-文件"><a href="#三、编写-docker-compose-yml-文件" class="headerlink" title="三、编写 docker-compose.yml 文件"></a>三、编写 docker-compose.yml 文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /app/docker/mysql8</span><br><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:8</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3306:3306&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span> <span class="comment"># 设置容器时区</span></span><br><span class="line">      <span class="attr">MYSQL_TCP_PORT:</span> <span class="number">3306</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">root</span> <span class="comment"># root用户密码</span></span><br><span class="line">      <span class="comment">#MYSQL_ROOT_HOST: &#x27;localhost&#x27; # 是否开启root账号的远程登录,默认是开启的,启用:填&#x27;%&#x27;或者注释掉这行,禁用:填&#x27;localhost&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./data:/var/lib/mysql&quot;</span> <span class="comment"># 映射数据目录</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./log:/var/log/mysql&quot;</span> <span class="comment"># 映射日志目录</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="四、启动容器"><a href="#四、启动容器" class="headerlink" title="四、启动容器"></a>四、启动容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、运行后查看启动容器的情况"><a href="#五、运行后查看启动容器的情况" class="headerlink" title="五、运行后查看启动容器的情况"></a>五、运行后查看启动容器的情况</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、连接测试"><a href="#六、连接测试" class="headerlink" title="六、连接测试"></a>六、连接测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it 容器ID /bin/bash</span><br><span class="line">mysql -h127.0.0.1 -uroot -p</span><br><span class="line">输入密码</span><br></pre></td></tr></table></figure>
+
+<p>如果远程连接不上可以看看防火墙是否已经开放3306端口,例如:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ufw status</span><br><span class="line">sudo ufw status numbered</span><br><span class="line">sudo ufw allow 3306</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>mysql</tag>
+      </tags>
   </entry>
 </search>
