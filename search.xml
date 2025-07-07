@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>使用docker-compose部署单机MySQL</title>
-    <url>/2024/%E4%BD%BF%E7%94%A8docker-compose%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BAMySQL/</url>
+    <url>/2021/%E4%BD%BF%E7%94%A8docker-compose%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BAMySQL/</url>
     <content><![CDATA[<h3 id="一、拉取MySQL镜像"><a href="#一、拉取MySQL镜像" class="headerlink" title="一、拉取MySQL镜像"></a>一、拉取MySQL镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mysql:8</span><br></pre></td></tr></table></figure>
 
 <h3 id="二、创建挂载目录"><a href="#二、创建挂载目录" class="headerlink" title="二、创建挂载目录"></a>二、创建挂载目录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /app/docker/mysql8/log</span><br><span class="line"><span class="built_in">mkdir</span> -p /app/docker/mysql8/data</span><br></pre></td></tr></table></figure>
