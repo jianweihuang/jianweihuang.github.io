@@ -1,7 +1,7 @@
 ---
 title: 使用docker-compose部署单机MySQL
 description: 本文讲述如何使用docker-compose部署单机MySQL8
-date: 2021-03-02
+date: 2021-03-02 20:15:03
 tags: 
   - docker
   - mysql
