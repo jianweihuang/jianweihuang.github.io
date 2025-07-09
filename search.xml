@@ -59,4 +59,26 @@
         <tag>redis</tag>
       </tags>
   </entry>
+  <entry>
+    <title>使用docker-compose部署单机MongoDB</title>
+    <url>/2021/%E4%BD%BF%E7%94%A8docker-compose%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BAMongoDB/</url>
+    <content><![CDATA[<h3 id="一、创建挂载目录"><a href="#一、创建挂载目录" class="headerlink" title="一、创建挂载目录"></a>一、创建挂载目录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /app/docker/mongo/data/db</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、编写-docker-compose-yml-文件"><a href="#二、编写-docker-compose-yml-文件" class="headerlink" title="二、编写 docker-compose.yml 文件"></a>二、编写 docker-compose.yml 文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /app/docker/mongo</span><br><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mongo:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mongo</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo:5</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;27017:27017&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_USERNAME:</span> <span class="string">root</span>  <span class="comment"># 配置了这两个参数后,就会以mongo --auth开启认证模式启动,并且creating a simple user with the role root in the admin authentication database</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_PASSWORD:</span> <span class="number">123456</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./data/db:/data/db&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、启动容器"><a href="#三、启动容器" class="headerlink" title="三、启动容器"></a>三、启动容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、运行后查看启动容器的情况"><a href="#四、运行后查看启动容器的情况" class="headerlink" title="四、运行后查看启动容器的情况"></a>四、运行后查看启动容器的情况</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、连接测试"><a href="#五、连接测试" class="headerlink" title="五、连接测试"></a>五、连接测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#mongo cli 连接测试</span></span><br><span class="line">docker run -it --network mongo_default --<span class="built_in">rm</span> mongo:5 mongosh --host mongo -u root -p 123456 --authenticationDatabase admin <span class="built_in">test</span></span><br><span class="line">db.getName();</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>mongo</tag>
+      </tags>
+  </entry>
 </search>
