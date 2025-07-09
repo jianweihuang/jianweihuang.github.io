@@ -81,4 +81,27 @@
         <tag>mongo</tag>
       </tags>
   </entry>
+  <entry>
+    <title>使用docker-compose部署单机influxdb</title>
+    <url>/2022/%E4%BD%BF%E7%94%A8docker-compose%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BAinfluxdb/</url>
+    <content><![CDATA[<h3 id="一、创建挂载目录"><a href="#一、创建挂载目录" class="headerlink" title="一、创建挂载目录"></a>一、创建挂载目录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /app/docker/influxdb/data</span><br><span class="line"><span class="built_in">mkdir</span> -p /app/docker/influxdb/config</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、编写-docker-compose-yml-文件"><a href="#二、编写-docker-compose-yml-文件" class="headerlink" title="二、编写 docker-compose.yml 文件"></a>二、编写 docker-compose.yml 文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /app/docker/influxdb</span><br><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">influxdb2:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">influxdb2</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">influxdb:2</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8086:8086&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">      <span class="attr">DOCKER_INFLUXDB_INIT_MODE:</span> <span class="string">setup</span></span><br><span class="line">      <span class="attr">DOCKER_INFLUXDB_INIT_USERNAME:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">DOCKER_INFLUXDB_INIT_PASSWORD:</span> <span class="string">root123456</span> <span class="comment"># 密码不能太短,否则启动不成功</span></span><br><span class="line">      <span class="attr">DOCKER_INFLUXDB_INIT_ORG:</span> <span class="string">myorg</span></span><br><span class="line">      <span class="attr">DOCKER_INFLUXDB_INIT_BUCKET:</span> <span class="string">mybucket</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./data:/var/lib/influxdb2&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./config:/etc/influxdb2&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、启动容器"><a href="#三、启动容器" class="headerlink" title="三、启动容器"></a>三、启动容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、运行后查看启动容器的情况"><a href="#四、运行后查看启动容器的情况" class="headerlink" title="四、运行后查看启动容器的情况"></a>四、运行后查看启动容器的情况</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、访问控制台"><a href="#五、访问控制台" class="headerlink" title="五、访问控制台"></a>五、访问控制台</h3><p>浏览器打开: <a href="http://localhost:8086/">http://localhost:8086</a></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>influxdb</tag>
+      </tags>
+  </entry>
 </search>
