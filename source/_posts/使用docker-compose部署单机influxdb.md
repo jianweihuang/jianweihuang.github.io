@@ -11,14 +11,14 @@ categories:
 
 ---
 
-### 一、创建挂载目录
+### 创建挂载目录
 
 ```bash
 mkdir -p /app/docker/influxdb/data
 mkdir -p /app/docker/influxdb/config
 ```
 
-### 二、编写 docker-compose.yml 文件
+### 编写 docker-compose.yml 文件
 ```bash
 cd /app/docker/influxdb
 vim docker-compose.yml
@@ -45,19 +45,20 @@ services:
 
 ```
 
-### 三、启动容器
+### 启动容器
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
-### 四、运行后查看启动容器的情况
+### 运行后查看启动容器的情况
 
 ```bash
 docker ps
+docker compose logs 
 ```
 
-### 五、访问控制台
+### 访问控制台
 
 浏览器打开: http://localhost:8086
 

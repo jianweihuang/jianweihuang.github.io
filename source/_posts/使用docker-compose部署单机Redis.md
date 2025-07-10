@@ -9,14 +9,14 @@ categories:
 date: 2021-03-02 20:35:03
 ---
 
-### 一、创建挂载目录
+### 创建挂载目录
 
 ```bash
 mkdir -p /app/docker/redis/conf
 mkdir -p /app/docker/redis/data
 ```
 
-### 二、编写docker-compose.yml文件和redis.conf配置文件
+### 编写docker-compose.yml文件和redis.conf配置文件
 
 docker-compose.yml文件
 
@@ -120,19 +120,20 @@ save 60 10000
 
 ```
 
-### 三、启动容器
+### 启动容器
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
-### 二、 四、运行后查看启动容器的情况
+### 运行后查看启动容器的情况
 
 ```bash
 docker ps
+docker compose logs 
 ```
 
-### 五、连接测试
+### 连接测试
 
 ```bash
 docker exec -it redis bash

@@ -11,20 +11,20 @@ categories:
 ---
 
 
-### 一、拉取MySQL镜像
+### 拉取MySQL镜像
 
 ```bash
 docker pull mysql:8
 ```
 
-### 二、创建挂载目录
+### 创建挂载目录
 
 ```bash
 mkdir -p /app/docker/mysql8/log
 mkdir -p /app/docker/mysql8/data
 ```
 
-### 三、编写 docker-compose.yml 文件
+### 编写 docker-compose.yml 文件
 ```bash
 cd /app/docker/mysql8
 vim docker-compose.yml
@@ -48,19 +48,20 @@ services:
       - "./log:/var/log/mysql" # 映射日志目录
 ```
 
-### 四、启动容器
+### 启动容器
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
-### 五、运行后查看启动容器的情况
+### 运行后查看启动容器的情况
 
 ```bash
 docker ps
+docker compose logs 
 ```
 
-### 六、连接测试
+### 连接测试
 
 ```bash
 docker exec -it 容器ID /bin/bash
@@ -68,7 +69,9 @@ mysql -h127.0.0.1 -uroot -p
 输入密码
 ```
 
-如果远程连接不上可以看看防火墙是否已经开放3306端口,例如:
+如果远程连接不上可以看看防火墙是否已经开放3306端口
+
+以Ubuntu为例:
 
 ```bash
 sudo ufw status
